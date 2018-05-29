@@ -18,24 +18,20 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * Created by 64274 on 2018/4/29.
- */
 
 @RestController // 等价于  @Controller +  @ResponseBody
 @RequestMapping(value="/api/sys_user")     // 通过这里配置使下面的映射都在/users下
 public class UserController
 {
-//    private static Logger log = Logger.getLogger("123");
     private final ResultGenerator generator = new ResultGenerator();
     @Autowired
     private BaseService baseService;
-    // 创建线程安全的Map static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 
     @RequestMapping(value="/queryList", method= RequestMethod.POST)
     public RestResult queryList(HttpServletRequest request) throws  Exception
     {
         Map map = GoatInfo.getInfo(request);
+        if(map == null)return generator.getFailResult("fuck");
         int pageNum  = (int)map.get("pageNum");
         int pageSize  = (int)map.get("pageSize");
         PageHelper.startPage(pageNum,pageSize);//
@@ -59,9 +55,10 @@ public class UserController
     }
     /***
      *  fuck @RequestParam 表示 请求中 必须带有 名称相同的变量 才能进入该方法 否则直接404 ！！！
-     *  http://localhost:8080/api/sys_user/get?name=123
+     *  fuck RequestMapping 后的字符串  大小写敏感！！！
+     *  http://localhost:8080/api/sys_user/GET?name=123
      */
-    @RequestMapping(value="/GET", method= RequestMethod.GET) // sos RequestMapping 后的字符串  大小写敏感！！！
+    @RequestMapping(value="/GET", method= RequestMethod.GET)
     public String getUser1(@RequestParam String name) {
         return name;
     }
@@ -74,8 +71,7 @@ public class UserController
 
 
     @RequestMapping(value="/POST", method= RequestMethod.POST)
-    public RestResult POST(HttpServletRequest request) throws  Exception // sos 这样可以  但是需要注意 这种方式 只能是POST方式 才可以 GET方式 不行！
-    {
+    public RestResult POST(HttpServletRequest request) throws  Exception {// sos 这样可以  但是需要注意 这种方式 只能是POST方式 才可以 GET方式 不行！
         Map map = GoatInfo.getInfo(request);
         int fuck = baseService.save("Sys_userMapper.save",map);
         return generator.getSuccessResult("添加用户成功",fuck);
@@ -93,14 +89,12 @@ public class UserController
 //        return "success";
 //    }
     @RequestMapping(value="/DELETE/{id}", method= RequestMethod.DELETE)
-    public RestResult DELETE(@PathVariable int id) throws Exception // sos 已经ok
-    {
+    public RestResult DELETE(@PathVariable int id) throws Exception { // sos 已经ok
         int result = baseService.delete("Sys_userMapper.delete",id);
         return generator.getSuccessResult("删除成功",result);
     }
     @RequestMapping(value="/batchDelete/{ids}", method= RequestMethod.DELETE)
-    public RestResult batchDelete(@PathVariable int[] ids) throws Exception
-    {
+    public RestResult batchDelete(@PathVariable int[] ids) throws Exception{
         List<Integer> list = Ints.asList(ids); // sos guava 可以的
         int result = baseService.batchDelete("Sys_userMapper.batchDelete",list);
         return generator.getSuccessResult("批量删除成功",result);

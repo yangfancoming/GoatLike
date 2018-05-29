@@ -19,7 +19,7 @@ public class GoatInfo
         String temp;
         while ((temp = br.readLine()) != null) {sb.append(temp);}
         br.close();
-        Map maps = (Map) JSON.parse(sb.toString());
+        Map maps = (Map) JSON.parse(sb.toString()); // 这里 只能解析 json 不能解析其他数据类型！
         return  maps;
     }
 
