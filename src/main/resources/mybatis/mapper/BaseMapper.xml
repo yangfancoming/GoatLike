@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BaseMapper">
+
+
+    <!--# _name _class _sid _age _sex _tel _school _doe _account _isenable _mark-->
+
+
+    <!-- 通过主键 查询单条记录 -->
+    <select id="findForObject" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM ${tableName} WHERE  1=1
+        <if test="columnName != null and columnName != ''"> and ${columnName} = #{columnName} </if>
+        <if test="ID != null and ID != ''"> and ID = #{ID} </if>
+    </select>
+
+
+
+    <!--<insert id="save" parameterType="pd">-->
+        <!--INSERT INTO dept (-->
+        <!--<trim suffix="" suffixOverrides=",">-->
+            <!--<if test="DEPTNO!=null and DEPTNO!='' ">DEPTNO, </if>-->
+            <!--<if test="DNAME!=null and DNAME!='' ">DNAME, </if>-->
+            <!--<if test="LOC!=null and LOC!='' ">LOC, </if>-->
+        <!--</trim>)-->
+        <!--VALUES (-->
+        <!--<trim suffix="" suffixOverrides=",">-->
+            <!--<if test="DEPTNO!=null and DEPTNO!='' ">#{DEPTNO}, </if>-->
+            <!--<if test="DNAME!=null and DNAME!='' ">#{DNAME}, </if>-->
+            <!--<if test="LOC!=null and LOC!=''">#{LOC}, </if>-->
+        <!--</trim>)-->
+    <!--</insert>-->
+</mapper>
