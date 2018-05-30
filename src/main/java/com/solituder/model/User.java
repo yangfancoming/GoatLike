@@ -1,46 +1,27 @@
 package com.solituder.model;
 
 
-import java.io.Serializable;
-import java.util.Date;
-
-public class User implements Serializable
+public class User
 {
-    private String id;
-    private String name;
-    private Integer age;
-    private Date birthday;
+    private Long id;
 
-    public String getId() {
+    private String username;
+
+    private String password;
+
+    public User() { }
+    
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getUsername() {
+        return username;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public String getPassword() {
+        return password;
     }
 
 }

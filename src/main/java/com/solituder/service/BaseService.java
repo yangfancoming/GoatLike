@@ -40,6 +40,10 @@ public class BaseService
     {
         return (Map)dao.findForObject(mapperId,pd);
     }
+    public Map  findForObject(String mapperId,String  pd)throws Exception
+    {
+        return (Map)dao.findForObject(mapperId,pd);
+    }
 	public int  findForCount(String mapperId,Map  pd)throws Exception
     {
         return (int)dao.findForObject(mapperId,pd);

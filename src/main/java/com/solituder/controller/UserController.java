@@ -71,7 +71,7 @@ public class UserController
 
 
     @RequestMapping(value="/POST", method= RequestMethod.POST)
-    public RestResult POST(HttpServletRequest request) throws  Exception {// sos 这样可以  但是需要注意 这种方式 只能是POST方式 才可以 GET方式 不行！
+    public RestResult POST(HttpServletRequest request) throws  Exception { // sos 这样可以  但是需要注意 这种方式 只能是POST方式 才可以 GET方式 不行！
         Map map = GoatInfo.getInfo(request);
         int fuck = baseService.save("Sys_userMapper.save",map);
         return generator.getSuccessResult("添加用户成功",fuck);
