@@ -58,7 +58,7 @@ public class JwtTokenFactory {
         return new AccessJwtToken(token, claims);
     }
 
-    public JwtToken createRefreshToken(UserContext userContext) { // 刷新Token
+    public JwtToken createRefreshToken(UserContext userContext) { // 创建刷新Token
         if (StringUtils.isBlank(userContext.getUsername())) {
             throw new IllegalArgumentException("Cannot create JWT Token without username");
         }

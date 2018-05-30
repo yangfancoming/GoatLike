@@ -12,15 +12,10 @@ import java.util.Date;
  * Aug 3, 2016
  */
 public class ErrorResponse {
-    // HTTP Response Status Code
-    private final HttpStatus status;
 
-    // General Error message
-    private final String message;
-
-    // Error code
-    private final ErrorCode errorCode;
-
+    private final HttpStatus status;  // HTTP Response Status Code
+    private final String message; // General Error message
+    private final ErrorCode errorCode; // Error code
     private final Date timestamp;
 
     protected ErrorResponse(final String message, final ErrorCode errorCode, HttpStatus status) {

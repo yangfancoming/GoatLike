@@ -32,24 +32,24 @@ import java.io.IOException;
 public class AjaxAwareAuthenticationFailureHandler implements AuthenticationFailureHandler
 {
     private final ObjectMapper mapper;
-    
+//    private final ResultGenerator generator = new ResultGenerator();
     @Autowired
     public AjaxAwareAuthenticationFailureHandler(ObjectMapper mapper) {
         this.mapper = mapper;
     }	
     
 	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,AuthenticationException e) throws IOException, ServletException{
-		response.setStatus(HttpStatus.UNAUTHORIZED.value());
-		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-		if (e instanceof BadCredentialsException) {
-			mapper.writeValue(response.getWriter(), ErrorResponse.of("Invalid username or password", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
-		} else if (e instanceof JwtExpiredTokenException) {
-			mapper.writeValue(response.getWriter(), ErrorResponse.of("Token has expired", ErrorCode.JWT_TOKEN_EXPIRED, HttpStatus.UNAUTHORIZED));
-		} else if (e instanceof AuthMethodNotSupportedException) {
-		    mapper.writeValue(response.getWriter(), ErrorResponse.of(e.getMessage(), ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
-		}
+	public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse res,AuthenticationException e) throws IOException, ServletException{
+        res.setStatus(HttpStatus.UNAUTHORIZED.value());
+        res.setContentType(MediaType.APPLICATION_JSON_VALUE); // "application/json";
 
-		mapper.writeValue(response.getWriter(), ErrorResponse.of("Authentication failed", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
+		if (e instanceof BadCredentialsException) {
+			mapper.writeValue(res.getWriter(), ErrorResponse.of("Invalid username or password", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
+		} else if (e instanceof JwtExpiredTokenException) {
+			mapper.writeValue(res.getWriter(), ErrorResponse.of("Token has expired", ErrorCode.JWT_TOKEN_EXPIRED, HttpStatus.UNAUTHORIZED));
+		} else if (e instanceof AuthMethodNotSupportedException) {
+		    mapper.writeValue(res.getWriter(), ErrorResponse.of(e.getMessage(), ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
+		}
+		mapper.writeValue(res.getWriter(), ErrorResponse.of("Authentication failed", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
 	}
 }

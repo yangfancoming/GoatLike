@@ -26,6 +26,6 @@ public class JwtHeaderTokenExtractor implements TokenExtractor {
             throw new AuthenticationServiceException("Invalid authorization header size.");
         }
 
-        return header.substring(HEADER_PREFIX.length(), header.length());
+        return header.substring(HEADER_PREFIX.length(), header.length()); // sos 注意 这里 用 substring 处理掉 Bearer
     }
 }
