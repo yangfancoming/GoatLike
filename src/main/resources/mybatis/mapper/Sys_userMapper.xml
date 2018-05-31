@@ -13,75 +13,79 @@
     <!--</select>-->
 
 
-    <!--<select id="findForList" resultType="java.util.Map">-->
-        <!--SELECT * FROM sys_user-->
-        <!--WHERE 1=1-->
-        <!--<if test="_name != null and _name != ''"> and _name like CONCAT(CONCAT('%', #{_name}),'%') </if>-->
-        <!--<if test="_createtime != null and _createtime !=''"> and date_format(_createtime,'%Y-%m-%d')= #{_createtime}</if>-->
-        <!--<if test="_doe != null and _doe !=''"> and date_format(_doe,'%Y-%m-%d')= #{_doe}</if>-->
-        <!--&lt;!&ndash;<if test="pd.createuser != null and pd.createuser != ''"> and t.createuser like CONCAT(CONCAT('%', #{pd.createuser}),'%') </if>&ndash;&gt;-->
-        <!--&lt;!&ndash;<if test="pd.createtime != null and pd.createtime !=''"> and date_format(t.createtime,'%Y-%m-%d')=#{pd.createtime}</if>&ndash;&gt;-->
-       <!--&lt;!&ndash;<if test="pd.device_type != null and pd.device_type != ''"> and t.device_type = #{pd.device_type} </if>&ndash;&gt;-->
-        <!--order by id  DESC-->
-    <!--</select>-->
-    <!--<select id="Export" resultType="java.util.Map">-->
-        <!--SELECT * FROM sys_user  WHERE 1=1-->
-        <!--<if test="_name != null and _name != ''"> and _name like CONCAT(CONCAT('%', #{_name}),'%') </if>-->
-        <!--<if test="_createtime != null and _createtime !=''"> and date_format(_createtime,'%Y-%m-%d')= #{_createtime}</if>-->
-        <!--<if test="_doe != null and _doe !=''"> and date_format(_doe,'%Y-%m-%d')= #{_doe}</if>-->
-        <!--order by id  DESC-->
-    <!--</select>-->
-    <!-- 新增-->
-    <!--<insert id="save" parameterType="java.util.Map">-->
-        <!--INSERT INTO sys_user (-->
-        <!--<trim suffix="" suffixOverrides=",">-->
-            <!--<if test="_name!=null and _name!='' ">_name, </if>-->
-            <!--<if test="_class!=null and _class!='' ">_class, </if>-->
-            <!--<if test="_sid!=null and _sid!='' ">_sid, </if>-->
-            <!--<if test="_age!=null and _age!='' ">_age, </if>-->
-            <!--<if test="_sex!=null and _sex!='' ">_sex, </if>-->
-            <!--<if test="_tel!=null and _tel!='' ">_tel, </if>-->
-            <!--<if test="_school!=null and _school!='' ">_school, </if>-->
-            <!--<if test="_doe!=null and _doe!='' ">_doe, </if>-->
-            <!--<if test="_account!=null and _account!='' ">_account, </if>-->
-            <!--<if test="_isenable!=null and _isenable!='' ">_isenable, </if>-->
-            <!--<if test="_mark!=null and _mark!='' ">_mark, </if>-->
-        <!--</trim>)-->
-        <!--VALUES (-->
-        <!--<trim suffix="" suffixOverrides=",">-->
-            <!--<if test="_name!=null and _name!='' ">#{_name}, </if>-->
-            <!--<if test="_class!=null and _class!='' ">#{_class}, </if>-->
-            <!--<if test="_sid!=null and _sid!=''">#{_sid}, </if>-->
-            <!--<if test="_age!=null and _age!=''">#{_age}, </if>-->
-            <!--<if test="_sex!=null and _sex!=''">#{_sex}, </if>-->
-            <!--<if test="_tel!=null and _tel!=''">#{_tel}, </if>-->
-            <!--<if test="_school!=null and _school!=''">#{_school}, </if>-->
-            <!--<if test="_doe!=null and _doe!=''">#{_doe}, </if>-->
-            <!--<if test="_account!=null and _account!=''">#{_account}, </if>-->
-            <!--<if test="_isenable!=null and _isenable!=''">#{_isenable}, </if>-->
-            <!--<if test="_mark!=null and _mark!=''">#{_mark}, </if>-->
-        <!--</trim>)-->
-    <!--</insert>-->
+    <select id="findForList" resultType="java.util.Map">
+        SELECT * FROM sys_user
+        WHERE 1=1
+        <if test="name != null and name != ''"> and name like CONCAT(CONCAT('%', #{name}),'%') </if>
+        <if test="createtime != null and createtime !=''"> and date_format(reatetime,'%Y-%m-%d')= #{createtime}</if>
+        <if test="dob != null and dob !=''"> and date_format(dob,'%Y-%m-%d')= #{dob}</if>
+        <!--<if test="pd.createuser != null and pd.createuser != ''"> and t.createuser like CONCAT(CONCAT('%', #{pd.createuser}),'%') </if>-->
+        <!--<if test="pd.createtime != null and pd.createtime !=''"> and dateformat(t.createtime,'%Y-%m-%d')=#{pd.createtime}</if>-->
+       <!--<if test="pd.device_type != null and pd.device_type != ''"> and t.device_type = #{pd.device_type} </if>-->
+        order by id  DESC
+    </select>
+    <select id="Export" resultType="java.util.Map">
+        SELECT * FROM sys_user  WHERE 1=1
+        <if test="name != null and name != ''"> and name like CONCAT(CONCAT('%', #{name}),'%') </if>
+        <if test="createtime != null and createtime !=''"> and date_format(createtime,'%Y-%m-%d')= #{createtime}</if>
+        <if test="dob != null and dob !=''"> and date_format(dob,'%Y-%m-%d')= #{dob}</if>
+        order by id  DESC
+    </select>
+     <!--新增-->
+    <insert id="save" parameterType="java.util.Map">
+        INSERT INTO sys_user (
+        <trim suffix="" suffixOverrides=",">
+            <if test="username!=null and username!='' ">username, </if>
+            <if test="name!=null and name!='' ">name, </if>
+            <if test="sid!=null and sid!='' ">sid, </if>
+            <if test="sex!=null and sex!='' ">sex, </if>
+            <if test="dob!=null and dob!='' ">dob, </if>
+            <if test="isenable!=null and isenable!='' ">isenable, </if>
+            <if test="remark!=null and remark!='' ">remark, </if>
+        </trim>)
+        VALUES (
+        <trim suffix="" suffixOverrides=",">
+            <if test="username!=null and username!='' ">#{username}, </if>
+            <if test="name!=null and name!='' ">#{name}, </if>
+            <if test="sid!=null and sid!=''">#{sid}, </if>
+            <if test="sex!=null and sex!=''">#{sex}, </if>
+            <if test="dob!=null and dob!=''">#{dob}, </if>
+            <if test="isenable!=null and isenable!=''">#{isenable}, </if>
+            <if test="remark!=null and remark!=''">#{remark}, </if>
+        </trim>)
+    </insert>
 
+    <update id="update" parameterType="java.util.Map">
+        update sys_user set
+        <trim suffix="" suffixOverrides=",">
+            <if test="username!=null and username!=''"> username = #{username},</if>
+            <if test="name!=null and name!=''"> name = #{name},</if>
+            <if test="sid!=null and sid!=''"> sid = #{sid},</if>
+            <if test="sex!=null and sex!=''"> sex = #{sex},</if>
+            <if test="dob!=null and dob!=''"> dob = #{dob},</if>
+            <if test="isenable!=null and isenable!=''"> isenable = #{isenable},</if>
+            <if test="remark!=null and remark!=''"> remark = #{remark},</if>
+        </trim>
+        where  id = #{id}
+    </update>
+    <!--_name _class _sid _age  _dob _sex _tel _school  _account _isenable _mark-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO sys_user (name,  sid, dob, sex)
+        VALUES
+        <foreach collection ="list" item="user" index= "index" separator =",">
+            (#{user.name},  #{user.sid}, #{user.dob}, #{user.sex}})
+        </foreach >
+    </insert>
 
-    <!--_name _class _sid _age  _doe _sex _tel _school _doe _account _isenable _mark-->
-    <!--<insert id="insertBatch" parameterType="java.util.List">-->
-        <!--INSERT INTO sys_user (_name, _class, _sid, _age,_doe, _sex, _tel, _school, _account, _mark)-->
-        <!--VALUES-->
-        <!--<foreach collection ="list" item="user" index= "index" separator =",">-->
-            <!--(#{user._name}, #{user._class}, #{user._sid}, #{user._age}, #{user._doe}, #{user._sex}, #{user._tel}, #{user._school},  #{user._account},  #{user._mark})-->
-        <!--</foreach >-->
-    <!--</insert>-->
+     <!--删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from sys_user where id = #{id}
+    </delete>
 
-    <!-- 删除-->
-    <!--<delete id="delete" parameterType="java.lang.Integer">-->
-        <!--delete from sys_user where id = #{ID}-->
-    <!--</delete>-->
-
-    <!--<delete id="batchDelete" parameterType="java.util.List">-->
-        <!--DELETE FROM sys_user WHERE id IN-->
-        <!--<foreach collection="list" item="id" open="(" separator="," close=")">-->
-            <!--#{id}-->
-        <!--</foreach>-->
-    <!--</delete>-->
+    <delete id="batchDelete" parameterType="java.util.List">
+        DELETE FROM sys_user WHERE id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

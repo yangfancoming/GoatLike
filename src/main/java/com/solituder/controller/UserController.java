@@ -76,7 +76,12 @@ public class UserController
         int fuck = baseService.save("Sys_userMapper.save",map);
         return generator.getSuccessResult("添加用户成功",fuck);
     }
-
+    @RequestMapping(value="/PATCH", method= RequestMethod.POST)
+    public RestResult PATCH(HttpServletRequest request) throws  Exception { // sos  注意： 这里method= RequestMethod.POST 不能使用 PATCH 否则 提示 禁止跨域请求
+        Map map = GoatInfo.getInfo(request);
+        int fuck = baseService.update("Sys_userMapper.update",map);
+        return generator.getSuccessResult("修改用户成功",fuck);
+    }
 //    @RequestMapping(value = "/test1", method = RequestMethod.POST)
 //    public Sys_user postUser1(@RequestBody Sys_user sys_user) // sos 这样可以
 //    {
