@@ -58,13 +58,13 @@
     <update id="update" parameterType="java.util.Map">
         update sys_user set
         <trim suffix="" suffixOverrides=",">
-            <if test="username!=null and username!=''"> username = #{username},</if>
-            <if test="name!=null and name!=''"> name = #{name},</if>
-            <if test="sid!=null and sid!=''"> sid = #{sid},</if>
-            <if test="sex!=null and sex!=''"> sex = #{sex},</if>
+            <if test="username!=null and username!=''  or username==0 "> username = #{username},</if>
+            <if test="name!=null and name!=''  or name==0 "> name = #{name},</if>
+            <if test="sid!=null and sid!=''  or sid==0 "> sid = #{sid},</if>
+            <if test="sex!=null and sex!='' or sex==0 "> sex = #{sex},</if>     <!-- fuck 这里有个大坑 如果参数 sex 为0(女) 那么 if条件会判断为否 不会update sex字段 所以需要加上 or sex==0-->
             <if test="dob!=null and dob!=''"> dob = #{dob},</if>
-            <if test="isenable!=null and isenable!=''"> isenable = #{isenable},</if>
-            <if test="remark!=null and remark!=''"> remark = #{remark},</if>
+            <if test="isenable!=null and isenable!='' or isenable==0 "> isenable = #{isenable},</if>
+            <if test="remark!=null and remark!='' or remark==0"> remark = #{remark},</if>
         </trim>
         where  id = #{id}
     </update>
