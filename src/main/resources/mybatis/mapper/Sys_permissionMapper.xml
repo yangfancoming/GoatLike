@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Sys_permissionMapper">
+
+
+    <select id="findForList" resultType="java.util.Map">
+        SELECT * FROM sys_permission  WHERE 1=1
+        <if test="name != null and name != '' or name==0"> and name like CONCAT(CONCAT('%', #{name}),'%') </if>
+        <if test="createtime != null and createtime !=''"> and date_format(reatetime,'%Y-%m-%d')= #{createtime}</if>
+        <if test="isenable != null and isenable !=''  or isenable==0"> and isenable = #{isenable}</if>
+        order by id  DESC
+    </select>
+    <!-- name  remark  sort  isenable -->
+     <!--新增-->
+    <insert id="save" parameterType="java.util.Map">
+        INSERT INTO sys_permission (
+        <trim suffix="" suffixOverrides=",">
+            <if test="name!=null and name!=''or name==0 ">name, </if>
+            <if test="sort!=null and sort!='' or sort==0 ">sort, </if>
+            <if test="isenable!=null and isenable!='' or isenable==0 ">isenable, </if>
+            <if test="remark!=null and remark!='' or remark==0 ">remark, </if>
+            <if test="url!=null and url!='' or url==0 ">url, </if>
+        </trim>)
+        VALUES (
+        <trim suffix="" suffixOverrides=",">
+            <if test="name!=null and name!='' or name==0 ">#{name}, </if>
+            <if test="sort!=null and sort!='' or sort==0">#{sort}, </if>
+            <if test="isenable!=null and isenable!='' or isenable==0">#{isenable}, </if>
+            <if test="remark!=null and remark!='' or remark==0">#{remark}, </if>
+            <if test="url!=null and url!='' or url==0">#{url}, </if>
+        </trim>)
+    </insert>
+
+    <!--<update id="update" parameterType="java.util.Map">-->
+        <!--update sys_user set-->
+        <!--<trim suffix="" suffixOverrides=",">-->
+            <!--<if test="username!=null and username!=''  or username==0 "> username = #{username},</if>-->
+            <!--<if test="name!=null and name!=''  or name==0 "> name = #{name},</if>-->
+            <!--<if test="sid!=null and sid!=''  or sid==0 "> sid = #{sid},</if>-->
+            <!--<if test="sex!=null and sex!='' or sex==0 "> sex = #{sex},</if>     &lt;!&ndash; fuck 这里有个大坑 如果参数 sex 为0(女) 那么 if条件会判断为否 不会update sex字段 所以需要加上 or sex==0&ndash;&gt;-->
+            <!--<if test="dob!=null and dob!=''"> dob = #{dob},</if>-->
+            <!--<if test="isenable!=null and isenable!='' or isenable==0 "> isenable = #{isenable},</if>-->
+            <!--<if test="remark!=null and remark!='' or remark==0"> remark = #{remark},</if>-->
+        <!--</trim>-->
+        <!--where  id = #{id}-->
+    <!--</update>-->
+    <!--_name _class _sid _age  _dob _sex _tel _school  _account _isenable _mark-->
+    <!--<insert id="insertBatch" parameterType="java.util.List">-->
+        <!--INSERT INTO sys_user (name,  sid, dob, sex)-->
+        <!--VALUES-->
+        <!--<foreach collection ="list" item="user" index= "index" separator =",">-->
+            <!--(#{user.name},  #{user.sid}, #{user.dob}, #{user.sex}})-->
+        <!--</foreach >-->
+    <!--</insert>-->
+
+     <!--删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from sys_permission where id = #{id}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        DELETE FROM sys_permission WHERE id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
