@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired private TokenExtractor tokenExtractor;
     @Autowired private AuthenticationManager authenticationManager;
 
-//    AjaxLoginProcessingFilter( Ajax 登录处理过滤器)
+//    AjaxLoginProcessingFilter( Ajax 登录处理过滤器 )
     protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
         AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, successHandler, failureHandler, objectMapper);
         filter.setAuthenticationManager(this.authenticationManager);
