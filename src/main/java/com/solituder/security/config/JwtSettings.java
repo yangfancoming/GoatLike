@@ -7,17 +7,12 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "demo.security.jwt")
 public class JwtSettings {
 
-    private Integer tokenExpirationTime;
-
     /**
      * Token issuer.
      */
+    private Integer tokenExpirationTime;
     private String tokenIssuer;
-    
-
     private String tokenSigningKey;
-    
-
     private Integer refreshTokenExpTime;
     
     public Integer getRefreshTokenExpTime() {

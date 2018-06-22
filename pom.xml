@@ -6,6 +6,7 @@
 	<groupId>com.solituder</groupId>
 	<artifactId>goat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!--<packaging>war</packaging>-->
 	<packaging>jar</packaging>
 	<name>goat</name>
 	<description>Demo project for Spring Boot</description>
@@ -52,9 +53,14 @@
         <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-freemarker</artifactId></dependency>
 
 
+        <!--声明spring boot内嵌tomcat的作用范围  在运行时不起作用-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
-
-        <dependency><groupId>org.json</groupId><artifactId>json</artifactId></dependency>
+        <!--<dependency><groupId>org.json</groupId><artifactId>json</artifactId></dependency>-->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -71,6 +77,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+        <finalName>myFirstDemo</finalName>
 	</build>
 
 

@@ -17,10 +17,12 @@ spring:
   datasource:
 #   数据源基本配置
 #    url: jdbc:mysql://localhost:3306/goat?Unicode=true&amp;characterEncoding=utf8&useSSL=true
-    url: jdbc:mysql://localhost:3306/authority?Unicode=true&amp;characterEncoding=utf8&useSSL=true
+#    url: jdbc:mysql://localhost:3306/authority?Unicode=true&amp;characterEncoding=utf8&useSSL=true
+    url: jdbc:mysql://47.98.148.84:3306/authority?Unicode=true&amp;characterEncoding=utf8&useSSL=true
+#    url: jdbc:mysql://47.98.148.84:3306/authority?Unicode=true&amp;characterEncoding=utf8&useSSL=true
     type: com.alibaba.druid.pool.DruidDataSource
     username: goat
-    password: jwfl
+    password: 123
     driver-class-name: com.mysql.jdbc.Driver
 
 #   数据源其他配置

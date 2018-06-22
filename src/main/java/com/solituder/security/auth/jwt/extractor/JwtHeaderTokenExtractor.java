@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
  * Authorization: Bearer scheme.
  * 
  * @author vladimir.stankovic
- *
+ *JwtHeaderTokenExtractor 是一个非常简单的类，通常用来扩展来处理身份检验的处理。
+  你可以扩展TokenExtractor 接口 和 提供你常用的一些实现。例如从URL中提取标记。
  * Aug 5, 2016
  */
 @Component

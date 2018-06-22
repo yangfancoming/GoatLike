@@ -44,12 +44,15 @@ public class AjaxAwareAuthenticationFailureHandler implements AuthenticationFail
         res.setContentType(MediaType.APPLICATION_JSON_VALUE); // "application/json";
 
 		if (e instanceof BadCredentialsException) {
-			mapper.writeValue(res.getWriter(), ErrorResponse.of("Invalid username or password", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
+//			mapper.writeValue(res.getWriter(), ErrorResponse.of("Invalid username or password", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
+			mapper.writeValue(res.getWriter(), ErrorResponse.of("账号与密码不匹配！", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
 		} else if (e instanceof JwtExpiredTokenException) {
-			mapper.writeValue(res.getWriter(), ErrorResponse.of("Token has expired", ErrorCode.JWT_TOKEN_EXPIRED, HttpStatus.UNAUTHORIZED));
+//			mapper.writeValue(res.getWriter(), ErrorResponse.of("Token has expired", ErrorCode.JWT_TOKEN_EXPIRED, HttpStatus.UNAUTHORIZED));
+			mapper.writeValue(res.getWriter(), ErrorResponse.of("登录超时，请重新登录！", ErrorCode.JWT_TOKEN_EXPIRED, HttpStatus.UNAUTHORIZED));
 		} else if (e instanceof AuthMethodNotSupportedException) {
 		    mapper.writeValue(res.getWriter(), ErrorResponse.of(e.getMessage(), ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
 		}
+//		mapper.writeValue(res.getWriter(), ErrorResponse.of("Authentication failed", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
 		mapper.writeValue(res.getWriter(), ErrorResponse.of("Authentication failed", ErrorCode.AUTHENTICATION, HttpStatus.UNAUTHORIZED));
 	}
 }

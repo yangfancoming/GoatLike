@@ -34,6 +34,11 @@ import java.util.stream.Collectors;
  * @author vladimir.stankovic
  *
  * Aug 5, 2016
+ *
+ * JwtAuthenticationProvider 拥有一下的一些职责：
+1. 验证 access token 的签名
+2. 从访问令牌中提取身份和授权声明和使用它们来创建UserContext
+3. 如果访问令牌是畸形的,过期的或者只是如果令牌不签署与适当的签名密钥身份验证就会抛出异常
  */
 @Component
 @SuppressWarnings("unchecked")

@@ -13,7 +13,8 @@ import java.util.stream.Collectors;
  * SkipPathRequestMatcher
  * 
  * @author vladimir.stankovic
- *
+ *JwtTokenAuthenticationProcessingFilter 过滤器被配置为跳过这个点：/api/auth/login 和 /api/auth/token .
+ * 这三个通过 SkipPathRequestMatcher 实现 RequestMatcher 接口来实现
  * Aug 19, 2016
  */
 public class SkipPathRequestMatcher implements RequestMatcher

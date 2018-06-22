@@ -27,7 +27,13 @@ import java.io.IOException;
  * Performs validation of provided JWT Token.
  * 
  * @author vladimir.stankovic
- *
+ *  JwtTokenAuthenticationProcessingFilter 过滤器 被应用到了每一个API（/api/**） 异常的刷新令牌端点（/api/auth/token）以及 login 点（/api/auth/login）。
+    这个过滤器拥有一下的一些职责：
+    1. 检查访问令牌在X-Authorization头。如果发现访问令牌的头,委托认证JwtAuthenticationProvider否则抛出身份验证异常
+    2. 调用成功或失败策略基于由JwtAuthenticationProvider执行身份验证过程的结果
+
+    确保chain.doFilter(request, response) 被调用,成功的验证了身份。你想在下一个处理器中，优先处理这些请求, 因为最后一个过滤器 FilterSecurityInterceptor#doFilter
+    会响应的实际调用方法是在Controller 中的处理访问API 资源的方法。
  * Aug 5, 2016
  */
 public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter

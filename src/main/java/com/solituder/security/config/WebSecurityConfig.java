@@ -1,16 +1,8 @@
 package com.solituder.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.svlada.CustomCorsFilter;
-//import com.svlada.security.RestAuthenticationEntryPoint;
-//import com.svlada.security.auth.ajax.AjaxAuthenticationProvider;
-//import com.svlada.security.auth.ajax.AjaxLoginProcessingFilter;
-//import com.svlada.security.auth.jwt.JwtAuthenticationProvider;
-//import com.svlada.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
-//import com.svlada.security.auth.jwt.SkipPathRequestMatcher;
-//import com.svlada.security.auth.jwt.extractor.TokenExtractor;
 import com.solituder.security.CustomCorsFilter;
-import com.solituder.security.RestAuthenticationEntryPoint;
+import com.solituder.security.UnauthorizedEntryPoint;
 import com.solituder.security.auth.ajax.AjaxAuthenticationProvider;
 import com.solituder.security.auth.ajax.AjaxLoginProcessingFilter;
 import com.solituder.security.auth.jwt.JwtAuthenticationProvider;
@@ -50,7 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     public static final String AUTHENTICATION_URL = "/api/auth/login";
     public static final String REFRESH_TOKEN_URL = "/api/auth/token";
     public static final String API_ROOT_URL = "/api/**";
-    @Autowired private RestAuthenticationEntryPoint authenticationEntryPoint;
+    /**
+     @Autowired相当于setter，在注入之前，对象已经实例化，是在这个接口注解的时候实例化的；
+     而new只是实例化一个对象，而且new的对象不能调用注入的其他类
+     */
+    @Autowired private UnauthorizedEntryPoint unauthorizedEntryPoint;
 //    AjaxLoginProcessingFilter
     @Autowired private AuthenticationSuccessHandler successHandler;
     @Autowired private AuthenticationFailureHandler failureHandler;
@@ -62,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired private TokenExtractor tokenExtractor;
     @Autowired private AuthenticationManager authenticationManager;
 
-
+//    AjaxLoginProcessingFilter( Ajax 登录处理过滤器)
     protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
         AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, successHandler, failureHandler, objectMapper);
         filter.setAuthenticationManager(this.authenticationManager);
@@ -94,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http
             .csrf().disable() // 我们已经禁用CSRF保护，因为我们不使用Cookie
             .exceptionHandling()
-            .authenticationEntryPoint(this.authenticationEntryPoint)
+            .authenticationEntryPoint(this.unauthorizedEntryPoint)
             .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()

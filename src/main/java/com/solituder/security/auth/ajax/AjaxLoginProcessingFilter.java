@@ -27,6 +27,14 @@ import java.io.IOException;
  * 
  * @author vladimir.stankovic
  *
+ * 首先，需要继承AbstractAuthenticationProcessingFilter, 目的是为了提供一般常用的Ajax 身份验证请求。
+ * 反序列化JSON和基本验证的主要任务都是在的。
+ * AjaxLoginProcessingFilter#attemptAuthentication这个方法里完成的。
+ * 在成功验证JSON的主要检验逻辑是委托给 AjaxAuthenticationProvider 类实现。
+ *
+ * 在一个成功校验中， AjaxLoginProcessingFilter#successfulAuthentication 方法会被调用。
+   在一个失败的检验中，AjaxLoginProcessingFilter#unsuccessfulAuthentication 方法被调用。
+ *
  * Aug 3, 2016
  */
 public class AjaxLoginProcessingFilter extends AbstractAuthenticationProcessingFilter

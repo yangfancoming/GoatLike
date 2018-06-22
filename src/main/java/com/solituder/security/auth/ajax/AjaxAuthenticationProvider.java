@@ -29,6 +29,12 @@ import java.util.stream.Collectors;
  * 
  * @author vladimir.stankovic
  *
+ *  AjaxAuthenticationProvider类的责任是:
+    1. 对用户凭证与 数据库、LDAP或其他系统用户数据，进行验证。
+    2. 如果用户名和密码不匹配数据库中的记录，身份验证异常将会被抛出。
+    3. 创建用户上下文，你需要一些你需要的用户数据来填充（例如 用户名 和用户密码）
+    4. 在成功验证委托创建JWT令牌的是在* AjaxAwareAuthenticationSuccessHandler* 中实现
+ *
  * Aug 3, 2016
  */
 @Component

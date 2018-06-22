@@ -5,9 +5,10 @@
 
     <select id="findForList" resultType="java.util.Map">
         SELECT * FROM sys_permission  WHERE 1=1
-        <if test="name != null and name != '' or name==0"> and name like CONCAT(CONCAT('%', #{name}),'%') </if>
+        <if test="name != null and name != '' "> and name like CONCAT(CONCAT('%', #{name}),'%') </if>
         <if test="createtime != null and createtime !=''"> and date_format(reatetime,'%Y-%m-%d')= #{createtime}</if>
         <if test="isenable != null and isenable !=''  or isenable==0"> and isenable = #{isenable}</if>
+        <if test="parentid != null and parentid !=''  "> and parentid = #{parentid}</if>
         order by id  DESC
     </select>
     <!-- name  remark  sort  isenable -->
@@ -19,7 +20,7 @@
             <if test="sort!=null and sort!='' or sort==0 ">sort, </if>
             <if test="isenable!=null and isenable!='' or isenable==0 ">isenable, </if>
             <if test="remark!=null and remark!='' or remark==0 ">remark, </if>
-            <if test="url!=null and url!='' or url==0 ">url, </if>
+            <if test="path!=null and path!='' or path==0 ">path, </if>
         </trim>)
         VALUES (
         <trim suffix="" suffixOverrides=",">
@@ -27,7 +28,7 @@
             <if test="sort!=null and sort!='' or sort==0">#{sort}, </if>
             <if test="isenable!=null and isenable!='' or isenable==0">#{isenable}, </if>
             <if test="remark!=null and remark!='' or remark==0">#{remark}, </if>
-            <if test="url!=null and url!='' or url==0">#{url}, </if>
+            <if test="path!=null and path!='' or path==0">#{path}, </if>
         </trim>)
     </insert>
 

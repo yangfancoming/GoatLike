@@ -17,7 +17,7 @@ import java.io.IOException;
  * Aug 4, 2016
  */
 @Component
-public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint
+public class UnauthorizedEntryPoint implements AuthenticationEntryPoint
 {
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex)throws IOException, ServletException{
