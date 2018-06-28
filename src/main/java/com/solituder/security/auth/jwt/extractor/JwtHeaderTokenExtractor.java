@@ -5,7 +5,7 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.stereotype.Component;
 
 /**
- * An implementation of {@link TokenExtractor} extracts token  from
+ * An implementation of {@link TokenExtractor}  extracts token  from
  * Authorization: Bearer scheme.
  * 
  * @author vladimir.stankovic
