@@ -58,19 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired private TokenExtractor tokenExtractor;
     @Autowired private AuthenticationManager authenticationManager;
 
-//    AjaxLoginProcessingFilter( Ajax 登录处理过滤器 )
-    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
-        AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, successHandler, failureHandler, objectMapper);
-        filter.setAuthenticationManager(this.authenticationManager);
-        return filter;
-    }
 
-    protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter(List<String> pathsToSkip, String pattern) throws Exception {
-        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, pattern);
-        JwtTokenAuthenticationProcessingFilter filter  = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
-        filter.setAuthenticationManager(this.authenticationManager);
-        return filter;
-    }
 
     @Bean
     @Override
@@ -89,21 +77,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         List<String> permitAllEndpointList = Arrays.asList(AUTHENTICATION_URL,REFRESH_TOKEN_URL,"/console" );
         http
             .csrf().disable() // 我们已经禁用CSRF保护，因为我们不使用Cookie
-            .exceptionHandling()
-            .authenticationEntryPoint(this.unauthorizedEntryPoint)
+            .exceptionHandling().authenticationEntryPoint(this.unauthorizedEntryPoint) // 当用户没有权限访问某个资源的时候，你可以在这里自定义返回内容
             .and()
+                /**
+                 SessionCreationPolicy.STATELESS 无状态的Session机制（即Spring不使用HTTPSession），
+                 对于所有的请求都做权限校验，这样Spring Security的拦截器会判断所有请求的Header上有没有”X-Auth-Token”。对于异常情况（即当Spring Security发现没有），
+                 Spring会启用一个认证入口：unauthorizedEntryPoint  这个入口只是简单的返回一个401即可
+                 */
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .authorizeRequests()
                 .antMatchers(permitAllEndpointList.toArray(new String[permitAllEndpointList.size()]))
-                .permitAll()
+                .permitAll() //  "/api/auth/login"   "/api/auth/token"  "/console"   不拦截 这些url
             .and()
                 .authorizeRequests()
-                .antMatchers(API_ROOT_URL).authenticated() // Protected API End-points
-            .and()
+                .antMatchers(API_ROOT_URL).authenticated() // Protected API End-points  对所有符合 "/api/**" 的url 进行拦截
+
+            .and()  //将自定义的 Filter 加入到 Spring Security 中的 Filter 链中的指定位置
                 .addFilterBefore(new CustomCorsFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(buildAjaxLoginProcessingFilter(AUTHENTICATION_URL), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(permitAllEndpointList,API_ROOT_URL), UsernamePasswordAuthenticationFilter.class);
 
+    }
+    //    AjaxLoginProcessingFilter( Ajax 登录处理过滤器 )
+    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
+        AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, successHandler, failureHandler, objectMapper);
+        filter.setAuthenticationManager(this.authenticationManager);
+        return filter;
+    }
+
+    protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter(List<String> pathsToSkip, String pattern) throws Exception {
+        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, pattern);
+        JwtTokenAuthenticationProcessingFilter filter  = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
+        filter.setAuthenticationManager(this.authenticationManager);
+        return filter;
     }
 }

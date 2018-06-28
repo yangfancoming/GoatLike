@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  * AjaxAwareAuthenticationSuccessHandler
- * 
+ * 这个类的责任是添加JSON载荷包含JWT访问和刷新令牌到HTTP响应的body。
  * @author vladimir.stankovic
  *
  *         Aug 3, 2016

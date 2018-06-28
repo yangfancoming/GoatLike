@@ -1,15 +1,10 @@
 package com.solituder.security.auth.ajax;
 
-//import com.svlada.entity.User;
-//import com.svlada.security.model.UserContext;
-//import com.svlada.user.service.DatabaseUserService;
-import com.solituder.model.User;
 import com.solituder.security.auth.token.UserContext;
 import com.solituder.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -33,7 +28,7 @@ import java.util.stream.Collectors;
     1. 对用户凭证与 数据库、LDAP或其他系统用户数据，进行验证。
     2. 如果用户名和密码不匹配数据库中的记录，身份验证异常将会被抛出。
     3. 创建用户上下文，你需要一些你需要的用户数据来填充（例如 用户名 和用户密码）
-    4. 在成功验证委托创建JWT令牌的是在* AjaxAwareAuthenticationSuccessHandler* 中实现
+    4. 在成功验证委托创建JWT令牌的是在* AjaxAwareAuthenticationSuccessHandler * 中实现
  *
  * Aug 3, 2016
  */
@@ -72,7 +67,8 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider
 //        List<GrantedAuthority> authorities = user.getRoles().stream()
 //                .map(authority -> new SimpleGrantedAuthority(authority.getRole().authority()))
 //                .collect(Collectors.toList());
-        List<GrantedAuthority> authorities = new ArrayList<>();  // 这里设置权限和角色
+        // 这里设置权限和角色
+        List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add( new SimpleGrantedAuthority("ROLE_ADMIN") );
         UserContext userContext = UserContext.create(username, authorities);
         Authentication auth = new UsernamePasswordAuthenticationToken(userContext, null, userContext.getAuthorities());

@@ -1,7 +1,6 @@
 package com.solituder.security.auth.token;
 
-//import com.svlada.security.exceptions.JwtExpiredTokenException;
-//import com.svlada.security.model.Scopes;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import org.springframework.security.authentication.BadCredentialsException;
