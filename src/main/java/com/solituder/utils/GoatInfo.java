@@ -10,10 +10,9 @@ import java.util.Map;
 /**
  * Created by 64274 on 2018/4/30.
  */
-public class GoatInfo
-{
-    public static Map getInfo(HttpServletRequest request) throws Exception
-    {
+public class GoatInfo{
+
+    public static Map getInfo(HttpServletRequest request) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "utf-8"));
         StringBuffer sb = new StringBuffer(""); //  {"_name":"123","_class":"123","_sid":"123","_sex":"1","_age":123}
         String temp;

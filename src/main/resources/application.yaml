@@ -6,7 +6,7 @@
 #5、使用#表示注释
 #6、字符串可以不用引号标注
 server:
-  port: 8063
+  port: 8064
 #@ConfigurationProperties(prefix = "demo.security.jwt")
 demo.security.jwt:
   tokenExpirationTime: 15 # Number of minutes

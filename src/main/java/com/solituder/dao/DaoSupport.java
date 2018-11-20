@@ -12,8 +12,7 @@ import java.util.List;
 
 
 @Repository
-public class DaoSupport implements DAO
-{
+public class DaoSupport implements DAO{
 
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate ; // sos : 这里 只需要加入  @Autowired 后 直接使用   因为 springboot 框架已经为我们配置好了！

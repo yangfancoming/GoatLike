@@ -50,7 +50,7 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws AuthenticationException, IOException, ServletException{
-        String tokenPayload = request.getHeader(WebSecurityConfig.AUTHENTICATION_HEADER_NAME); // sos 注意 这里 是后台邀请的 token 请求头标志！
+        String tokenPayload = request.getHeader(WebSecurityConfig.AUTHENTICATION_HEADER_NAME); // sos 注意 这里 是后台要求的 token 请求头标志！
         RawAccessJwtToken token = new RawAccessJwtToken(tokenExtractor.extract(tokenPayload));
         return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
     }

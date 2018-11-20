@@ -10,8 +10,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * Created by 64274 on 2018/6/6.
  */
 //@SpringBootApplication
-public class SpringBootStartApplication extends SpringBootServletInitializer
-{
+public class SpringBootStartApplication extends SpringBootServletInitializer{
     /**
      * 如果要发布到自己的Tomcat中的时候，需要继承SpringBootServletInitializer类，并且增加如下的configure方法。
      * 如果不发布到自己的Tomcat中的时候，就无需上述的步骤

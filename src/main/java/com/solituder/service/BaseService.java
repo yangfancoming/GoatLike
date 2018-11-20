@@ -7,6 +7,7 @@ package com.solituder.service;
 //import com.github.pagehelper.Page;
 import com.github.pagehelper.Page;
 import com.solituder.dao.DaoSupport;
+import com.solituder.model.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +50,7 @@ public class BaseService
         return (int)dao.findForObject(mapperId,pd);
     }
 	public Page<Map> findForList(String mapperId, Map  pd)throws Exception{return (Page<Map>)dao.findForList(mapperId, pd);}
+	public List<Menu>  findForTree(String mapperId, Map  pd)throws Exception{return (List<Menu>)dao.findForList(mapperId, pd);}
     public List<Map> Export(String mapperId, Map  pd)throws Exception{return (List<Map>)dao.findForList(mapperId, pd);}
     public Integer  update(String mapperId,Map  pd)throws Exception
     {

@@ -28,8 +28,7 @@ public class UserController
     private BaseService baseService;
 
     @RequestMapping(value="/queryList", method= RequestMethod.POST)
-    public RestResult queryList(HttpServletRequest request) throws  Exception
-    {
+    public RestResult queryList(HttpServletRequest request) throws  Exception {
         Map map = GoatInfo.getInfo(request);
         if(map == null)return generator.getFailResult("fuck");
         int pageNum  = (int)map.get("pageNum");

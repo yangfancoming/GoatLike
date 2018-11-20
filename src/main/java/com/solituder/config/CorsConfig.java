@@ -11,20 +11,18 @@ import org.springframework.web.filter.CorsFilter;
  * @author bekey
  */
 @Configuration
-public class CorsConfig
-{
+public class CorsConfig    {
     /**
      允许任何域名使用
-     允许任何头
+     允许任何头  http://127.0.0.1:9528
      允许任何方法（post、get等）
      */
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         // // addAllowedOrigin 不能设置为* 因为与 allowCredential 冲突,需要设置为具体前端开发地址
-        corsConfiguration.addAllowedOrigin("http://127.0.0.1:9527");
+        corsConfiguration.addAllowedOrigin("http://127.0.0.1:9528"); // 这里必须写上前端项目地址和端口
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
-        // allowCredential 需设置为true
         corsConfiguration.setAllowCredentials(true);
         return corsConfiguration;
     }
