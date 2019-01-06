@@ -42,8 +42,8 @@ import java.util.stream.Collectors;
  */
 @Component
 @SuppressWarnings("unchecked")
-public class JwtAuthenticationProvider implements AuthenticationProvider
-{
+public class JwtAuthenticationProvider implements AuthenticationProvider {
+
     private final JwtSettings jwtSettings;
     
     @Autowired
@@ -52,8 +52,8 @@ public class JwtAuthenticationProvider implements AuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException
-    {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         RawAccessJwtToken rawAccessToken = (RawAccessJwtToken) authentication.getCredentials();
         Jws<Claims> jwsClaims = rawAccessToken.parseClaims(jwtSettings.getTokenSigningKey());
         String subject = jwsClaims.getBody().getSubject();

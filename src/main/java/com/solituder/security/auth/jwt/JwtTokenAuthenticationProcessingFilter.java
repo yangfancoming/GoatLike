@@ -36,8 +36,8 @@ import java.io.IOException;
     会响应的实际调用方法是在Controller 中的处理访问API 资源的方法。
  * Aug 5, 2016
  */
-public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter
-{
+public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
+
     private final AuthenticationFailureHandler failureHandler;
     private final TokenExtractor tokenExtractor;
     

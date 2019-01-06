@@ -47,8 +47,7 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)throws AuthenticationException
-    {
+    public Authentication authenticate(Authentication authentication)throws AuthenticationException {
         Assert.notNull(authentication, "No authentication data provided");
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();

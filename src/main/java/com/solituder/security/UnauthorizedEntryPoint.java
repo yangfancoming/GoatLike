@@ -20,7 +20,7 @@ import java.io.IOException;
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint
 {
 	@Override
-	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex)throws IOException, ServletException{
+	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex)throws IOException{
 		response.sendError(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.name() ); //"Unauthorized"
 	}
 }

@@ -14,20 +14,19 @@ import java.util.Map;
  * Created by 64274 on 2018/6/2.
  *
  * sos util类  因为 从配置文件中读取数据 所以 在其他类中 引用的时候 必须要
- * sos @Autowired private FreemarkerUtils freemarkerUtils; 后 使用， 不能new出来使用！ 否则  @Value 取不到值 为null
+ *   @Autowired private FreemarkerUtils freemarkerUtils; 后 使用， 不能new出来使用！ 否则  @Value 取不到值 为null
  */
 @Component
-public class FreemarkerUtils
-{
+public class FreemarkerUtils{
+
     // sos 单个取 application.properties 文件中 内容的注解方式
     @Value("${spring.freemarker.charset}")       public  String charset;
     @Value("${spring.freemarker.template_path}") public  String template_path;
     @Value("${spring.freemarker.out_path}")      public  String out_path;
 //    @Value("${spring.freemarker.file_name}")     public static String file_name; // 模板文件名
 
-    public  void common(Map map,String file_name,String out_filename) throws Exception
-    {
-        //创建一个freemarker.template.Configuration实例，它是存储 FreeMarker 应用级设置的核心部分
+    public  void common(Map map,String file_name,String out_filename) throws Exception {
+        //创建一个freemarker.template.Configuration 实例，它是存储 FreeMarker 应用级设置的核心部分
         Configuration cfg = new Configuration(Configuration.getVersion());
         cfg.setDirectoryForTemplateLoading(new File(template_path));// 设置模板所在路径
         cfg.setDefaultEncoding(charset); //设置默认编码格式

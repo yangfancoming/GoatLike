@@ -100,13 +100,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
     //    AjaxLoginProcessingFilter( Ajax 登录处理过滤器 )
-    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
+    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint)   {
         AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, successHandler, failureHandler, objectMapper);
         filter.setAuthenticationManager(this.authenticationManager);
         return filter;
     }
 
-    protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter(List<String> pathsToSkip, String pattern) throws Exception {
+    protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter(List<String> pathsToSkip, String pattern)   {
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, pattern);
         JwtTokenAuthenticationProcessingFilter filter  = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
         filter.setAuthenticationManager(this.authenticationManager);

@@ -50,9 +50,7 @@ public class JwtTokenFactory {
           .setClaims(claims)
           .setIssuer(settings.getTokenIssuer())
           .setIssuedAt(Date.from(currentTime.atZone(ZoneId.systemDefault()).toInstant()))
-          .setExpiration(Date.from(currentTime
-              .plusMinutes(settings.getTokenExpirationTime())
-              .atZone(ZoneId.systemDefault()).toInstant()))
+          .setExpiration(Date.from(currentTime.plusMinutes(settings.getTokenExpirationTime()).atZone(ZoneId.systemDefault()).toInstant()))
           .signWith(SignatureAlgorithm.HS512, settings.getTokenSigningKey())
         .compact();
         return new AccessJwtToken(token, claims);

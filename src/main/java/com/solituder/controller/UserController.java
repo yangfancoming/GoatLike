@@ -62,8 +62,7 @@ public class UserController
         return name;
     }
     @RequestMapping(value="user/{id}/{name}",method= RequestMethod.GET)
-    public String myController(@PathVariable String id, @PathVariable String name, ModelMap model)
-    {
+    public String myController(@PathVariable String id, @PathVariable String name, ModelMap model){
         return "ok";
     }
 
